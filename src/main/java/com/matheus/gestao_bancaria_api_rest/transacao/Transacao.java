@@ -1,6 +1,5 @@
 package com.matheus.gestao_bancaria_api_rest.transacao;
 
-import com.matheus.gestao_bancaria_api_rest.conta.DadosConta;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
