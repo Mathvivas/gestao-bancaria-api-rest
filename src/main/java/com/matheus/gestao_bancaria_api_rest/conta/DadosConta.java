@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotNull;
 
 public record DadosConta(
     @NotNull
-    Integer numero_conta,
+    Integer numeroConta,
 
     @NotNull
     float saldo) {

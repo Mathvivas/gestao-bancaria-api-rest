@@ -11,15 +11,15 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of = "numero_conta")
+@EqualsAndHashCode(of = "numeroConta")
 public class Conta {
 
     @Id
-    private Integer numero_conta;
+    private Integer numeroConta;
     private float saldo;
 
     public Conta(DadosConta dados) {
-        this.numero_conta = dados.numero_conta();
+        this.numeroConta = dados.numeroConta();
         this.saldo = dados.saldo();
     }
 }

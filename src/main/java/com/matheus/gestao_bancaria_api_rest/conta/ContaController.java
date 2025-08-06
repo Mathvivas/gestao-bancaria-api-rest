@@ -22,13 +22,13 @@ public class ContaController {
     }
 
     @GetMapping
-    public ResponseEntity<?> listar(@RequestParam(required = false) Integer numero_conta) {
-        if (numero_conta == null) {
+    public ResponseEntity<?> listar(@RequestParam(required = false) Integer numeroConta) {
+        if (numeroConta == null) {
             return ResponseEntity
                     .badRequest()
-                    .body("Você deve fornecer o parâmetro 'numero_conta'.");
+                    .body("Você deve fornecer o parâmetro 'numeroConta'.");
         }
-            return repository.findById(numero_conta)
+            return repository.findById(numeroConta)
                     .map(ResponseEntity::ok)
                     .orElse(ResponseEntity.notFound().build());
     }
