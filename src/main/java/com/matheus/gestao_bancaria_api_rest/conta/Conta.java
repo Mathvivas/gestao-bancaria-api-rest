@@ -1,8 +1,6 @@
 package com.matheus.gestao_bancaria_api_rest.conta;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -13,15 +11,15 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of = "id")
+@EqualsAndHashCode(of = "numero_conta")
 public class Conta {
 
     @Id
-    private int id;
+    private Integer numero_conta;
     private float saldo;
 
     public Conta(DadosConta dados) {
-        this.id = dados.id();
+        this.numero_conta = dados.numero_conta();
         this.saldo = dados.saldo();
     }
 }
