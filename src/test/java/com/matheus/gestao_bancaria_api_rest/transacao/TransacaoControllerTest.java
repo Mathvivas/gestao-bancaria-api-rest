@@ -12,11 +12,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.hamcrest.Matchers.containsString;
-import static org.junit.jupiter.api.Assertions.*;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -49,7 +47,8 @@ class TransacaoControllerTest {
                         .contentType(String.valueOf(MediaType.APPLICATION_JSON))
                         .content(json))
                 .andExpect(status().isCreated())
-                .andExpect(content().string(containsString("Transação realizada com sucesso")));
+                .andExpect(jsonPath("$.numeroConta").value(234))
+                .andExpect(jsonPath("$.saldo").exists());
     }
 
     @Test
