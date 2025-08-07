@@ -53,6 +53,8 @@ public record ContaDTO(Integer id, float saldo) {}
 ![tabela criada no sistema](src/main/resources/screenshots/conta/tabelaCriada.png)
 - Ao executar o método POST no Postman, tem-se:
 
+![conta criada no Postman](src/main/resources/screenshots/conta/contaCriada.png)
+
 ![conta criada na tabela](src/main/resources/screenshots/conta/contaCriadaNaTabela.png)
 
 ### Criação do método GET
@@ -78,12 +80,12 @@ public record ContaDTO(Integer id, float saldo) {}
 ### Criação da Entidade JPA Transação, DTO Record e Controller
 
 ### Realização da Lógica de Taxas
-- Transação PIX
-
-![transação pix](src/main/resources/screenshots/transacao/transacaoPix.png)
 - Saldo Antes PIX
 
 ![saldo antes da transação pix](src/main/resources/screenshots/transacao/saldoAntesTransacaoPix.png)
+- Transação PIX
+
+![transação pix](src/main/resources/screenshots/transacao/transacaoPix.png)
 - Saldo Após PIX
 
 ![saldo após a transação pix](src/main/resources/screenshots/transacao/saldoAposTransacaoPix.png)
@@ -93,6 +95,9 @@ public record ContaDTO(Integer id, float saldo) {}
 - Saldo Após Crédito
 
 ![saldo após a transação crédito](src/main/resources/screenshots/transacao/saldoAposTransacaoCredito.png)
+- Saldo Antes Débito
+
+![saldo antes da transação débito](src/main/resources/screenshots/transacao/saldoAntesTransacaoDebito.png)
 - Transação Débito
 
 ![transação débito](src/main/resources/screenshots/transacao/transacaoDebito.png)
@@ -102,3 +107,23 @@ public record ContaDTO(Integer id, float saldo) {}
 - Saldo Insuficiente
 
 ![saldo insuficiente](src/main/resources/screenshots/transacao/saldoInsuficiente.png)
+
+## Testes Automatizados
+
+- Foram testadas a ContaRepository e o TransacaoController
+- Utilizado o MockMvc para simular requisições HTTP nos controllers
+- Utilizado o DataJpaTest para testar os repositories com um banco de dados
+
+### Testes do Repository
+
+- Foram testadas a busca da conta pelo ID (numeroConta) e o salvamento da conta
+
+![teste do repository](src/main/resources/screenshots/testes/testeRepository.png)
+
+### Testes do Controller
+
+- Foram testadas transações com uma conta não existente, uma transação débito com saldo suficiente e uma transação 
+  com saldo insuficiente
+
+![teste do controller](src/main/resources/screenshots/testes/testeController.png)
+
