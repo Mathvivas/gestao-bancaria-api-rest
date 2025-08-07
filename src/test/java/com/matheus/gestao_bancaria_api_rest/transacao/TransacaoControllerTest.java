@@ -48,7 +48,7 @@ class TransacaoControllerTest {
         mockMvc.perform(post("/transacao")
                         .contentType(String.valueOf(MediaType.APPLICATION_JSON))
                         .content(json))
-                .andExpect(status().isOk())
+                .andExpect(status().isCreated())
                 .andExpect(content().string(containsString("Transação realizada com sucesso")));
     }
 
