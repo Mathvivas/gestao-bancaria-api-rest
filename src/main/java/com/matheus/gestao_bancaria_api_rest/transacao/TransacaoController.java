@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,6 +46,9 @@ public class TransacaoController {
         conta.setSaldo(conta.getSaldo() - total);
         repository.save(conta);
 
-        return ResponseEntity.ok("Transação realizada com sucesso. Taxa aplicada: " + taxa);
+        URI location = URI.create("/conta?numero_conta=" + conta.getNumeroConta());
+
+        return ResponseEntity.created(location)
+                .body("Transação realizada com sucesso. Taxa aplicada: " + taxa);
     }
 }
