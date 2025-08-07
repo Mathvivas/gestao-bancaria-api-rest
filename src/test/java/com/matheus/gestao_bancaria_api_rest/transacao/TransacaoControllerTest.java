@@ -82,7 +82,7 @@ class TransacaoControllerTest {
         mockMvc.perform(post("/transacao")
                         .contentType(String.valueOf(MediaType.APPLICATION_JSON))
                         .content(json))
-                .andExpect(status().isBadRequest())
+                .andExpect(status().isNotFound())
                 .andExpect(content().string(containsString("Saldo insuficiente")));
     }
 }

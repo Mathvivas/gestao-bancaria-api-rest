@@ -40,7 +40,7 @@ public class TransacaoController {
         float total = valor + taxa;
 
         if (conta.getSaldo() < total) {
-            return ResponseEntity.badRequest().body("Saldo insuficiente para realizar a transação");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Saldo insuficiente para realizar a transação");
         }
 
         conta.setSaldo(conta.getSaldo() - total);
