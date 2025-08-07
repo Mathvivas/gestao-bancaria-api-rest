@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
@@ -36,19 +38,27 @@ public class TransacaoController {
 
         Conta conta = contaOpt.get();
 
-        float taxa = valor * forma.getTaxa();
-        float total = valor + taxa;
+        BigDecimal taxa = BigDecimal.valueOf(valor)
+                .multiply(BigDecimal.valueOf(forma.getTaxa()))
+                .setScale(2, RoundingMode.HALF_UP);
 
-        if (conta.getSaldo() < total) {
+        BigDecimal total = BigDecimal.valueOf(valor)
+                .add(taxa)
+                .setScale(2, RoundingMode.HALF_UP);
+
+        BigDecimal saldoAtual = BigDecimal.valueOf(conta.getSaldo());
+
+        if (saldoAtual.compareTo(total) < 0) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Saldo insuficiente para realizar a transação");
         }
 
-        conta.setSaldo(conta.getSaldo() - total);
+        BigDecimal novoSaldo = saldoAtual.subtract(total).setScale(2, RoundingMode.HALF_UP);
+        conta.setSaldo(novoSaldo.floatValue());
         repository.save(conta);
 
         URI location = URI.create("/conta?numero_conta=" + conta.getNumeroConta());
 
         return ResponseEntity.created(location)
-                .body("Transação realizada com sucesso. Taxa aplicada: " + taxa);
+                .body(conta);
     }
 }
