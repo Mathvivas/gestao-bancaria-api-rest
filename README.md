@@ -48,7 +48,8 @@ public record ContaDTO(Integer id, float saldo) {}
   query que será executada
 - O arquivo deve ser salvo em um diretório específico: ```db/migration```
 - O nome do arquivo sempre deve começar com Vn__, com n seguindo a ordem dos scripts
-- Após a execução do script ```V1__create-table-conta.sql```, a tabela foi criada no sistema
+- Após a execução do script ```V1__create-table-conta.sql``` (executado automaticamente ao rodar a aplicação), a tabela 
+  foi criada no sistema
 
 ![tabela criada no sistema](src/main/resources/screenshots/conta/tabelaCriada.png)
 - Ao executar o método POST no Postman, tem-se:
@@ -58,7 +59,8 @@ public record ContaDTO(Integer id, float saldo) {}
 ![conta criada na tabela](src/main/resources/screenshots/conta/contaCriadaNaTabela.png)
 
 ### Criação do método GET
-- Foi criado o método GET fazendo com que seja impossível retornar todas as contas, por motivos de segurança.
+- O método GET foi criado de uma forma que seja impossível retornar todas as contas, por motivos de 
+  segurança.
 - Ao utilizar o parâmetro "numero_conta" com um valor existente, obtém-se o seguinte resultado:
 
 ![get conta 200](src/main/resources/screenshots/conta/getConta200.png)
@@ -80,30 +82,24 @@ public record ContaDTO(Integer id, float saldo) {}
 ### Criação da Entidade JPA Transação, DTO Record e Controller
 
 ### Realização da Lógica de Taxas
-- Saldo Antes PIX
+- Saldo Antes da Transação
 
-![saldo antes da transação pix](src/main/resources/screenshots/transacao/saldoAntesTransacaoPix.png)
+![saldo antes da transação](src/main/resources/screenshots/transacao/saldoAntesTransacao.png)
 - Transação PIX
 
 ![transação pix](src/main/resources/screenshots/transacao/transacaoPix.png)
-- Saldo Após PIX
-
-![saldo após a transação pix](src/main/resources/screenshots/transacao/saldoAposTransacaoPix.png)
 - Transação Crédito
 
 ![transação crédito](src/main/resources/screenshots/transacao/transacaoCredito.png)
-- Saldo Após Crédito
-
-![saldo após a transação crédito](src/main/resources/screenshots/transacao/saldoAposTransacaoCredito.png)
-- Saldo Antes Débito
-
-![saldo antes da transação débito](src/main/resources/screenshots/transacao/saldoAntesTransacaoDebito.png)
 - Transação Débito
 
 ![transação débito](src/main/resources/screenshots/transacao/transacaoDebito.png)
-- Saldo Após Débito
 
-![saldo após a transação débito](src/main/resources/screenshots/transacao/saldoAposTransacaoDebito.png)
+- O JSON em certos momentos retorna o saldo com 4 casas decimais, porém no banco o saldo é persistido com somente 
+  duas casas decimais
+
+![saldo com duas casas decimais no banco](src/main/resources/screenshots/transacao/saldoNoBancoComDuasCasas.png)
+
 - Saldo Insuficiente
 
 ![saldo insuficiente](src/main/resources/screenshots/transacao/saldoInsuficiente.png)
