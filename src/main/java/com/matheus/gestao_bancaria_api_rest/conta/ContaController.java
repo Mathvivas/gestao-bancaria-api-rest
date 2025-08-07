@@ -6,6 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
+
 @RestController
 @RequestMapping("conta")
 public class ContaController {
@@ -15,8 +17,13 @@ public class ContaController {
 
     @PostMapping
     @Transactional
-    public void criar(@RequestBody @Valid DadosConta dados) {
-        repository.save(new Conta(dados));
+    public ResponseEntity<Conta> criar(@RequestBody @Valid DadosConta dados) {
+        Conta novaConta = new Conta(dados);
+        repository.save(novaConta);
+
+        URI location = URI.create("/conta?numeroConta=" + novaConta.getNumeroConta());
+
+        return ResponseEntity.created(location).body(novaConta);
     }
 
     @GetMapping
